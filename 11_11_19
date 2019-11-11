@@ -1,0 +1,76 @@
+#lang sicp
+
+(define (average x y) (/ (+ x y) 2.0))
+(define (close-enough? x y) (< (abs (- x y)) 0.0001))
+
+(define (average-damp f) (lambda (x) (average x (f x))))
+
+
+(define (search f neg-point pos-point)
+  (let ((midpoint (average neg-point pos-point)))
+    (if (close-enough? neg-point pos-point)
+        midpoint
+        (let ((test-value (f midpoint)))
+          (cond ((positive? test-value)
+                 (search f neg-point midpoint))
+                ((negative? test-value)
+                 (search f midpoint pos-point))
+                (else midpoint))))))
+
+
+
+(define (half-interval-method f a b)
+  (let ((a-value (f a))
+        (b-value (f b)))
+    (cond ((and (negative? a-value) (positive? b-value))
+           (search f a b))
+          ((and (negative? b-value) (positive? a-value))
+           (search f b a))
+          (else
+           (error "Values are not of opposite sign" a b)))))
+
+; half interval sqrt (hi-sqrt 36) = ~6 
+(define (hi-sqrt x)
+  (half-interval-method (lambda (y) (- (* y y) x)) 0 x))
+
+
+(define (fixed-point f first-guess)
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+          next
+          (try next))))
+  (try first-guess))
+
+
+(define (n-pow x n)
+  (if (= n 0) 1
+      (* x (n-pow x (- n 1)))))
+
+(define (afp-sqrt x)
+  (fixed-point (lambda (y) (average y (/ x y))) 1.0))
+
+(define (afp-crt x)
+  (fixed-point (average-damp (lambda  (y) (/ x (* y y)))) 1.0))
+
+(define (n-root x n)
+  (fixed-point (average-damp (lambda  (y) (/ x (n-pow y (- n 1))))) 1.0))
+
+
+; EX 1.42
+
+(define (compose f g)
+  (lambda (x) (f (g x))))
+
+;> (define foo (compose afp-sqrt (lambda (x) (* x x))))
+;> (foo 3)
+;3.000000001396984
+
+;compose vraca funkciju
+; > (compose 2 3)
+
+
+
+
+
+

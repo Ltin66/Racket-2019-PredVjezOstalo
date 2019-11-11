@@ -1,0 +1,32 @@
+#lang racket
+
+(define (funkcija x) (* x 3))
+;kad ima zagradu onda se radi o funkiciji
+; LISt Processor  LISP
+; sve se sadrži od liste
+;RACKET je jedna od više shema (dijalekta) kao npr. Clojure
+(funkcija 5)
+
+;string Racket docs
+;naredbe koje imaju uskličnik zbilja mijenjaju vrijednost
+
+;(define (hello-alice-bob name)
+;  (if (or string=? "Alice" name)
+;      ( string=? "Bob" name))
+;      (display (string-replace "Hello, Ab!" "Ab" name)))
+
+;(hello-alice-bob "Bob")
+
+(define (sum-to-n n)
+  (if (> n 0)
+      (+ n (sum-to-n (- n 1)))
+      0))
+
+(define (sum-to-n-only-multiples-of-3-and-5 n)
+  (if (<= n 0)
+      0
+      (if (or (= (remainder n 3) 0) (= (remainder n 5) 0))
+          (+ n (sum-to-n-only-multiples-of-3-and-5 (- n 1)))
+          0)))
+
+

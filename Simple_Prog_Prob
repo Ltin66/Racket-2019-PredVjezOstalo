@@ -1,0 +1,84 @@
+#lang racket
+;https://adriann.github.io/programming_problems.html
+
+
+; 1
+(display "1. Hello World\n")
+
+
+; 2
+;(define a (read-line (current-input-port) 'any))
+(define a "Dave")
+(display  (string-append "2. Hello " a "\n"))
+
+
+; 3
+;(define b (read-line (current-input-port) 'any))
+(if (or (string=? a "Dave" ) (string=? a "Alice") (string=? a "Rabbit"))
+    (display  (string-append "3. I can't do that " a "\n"))
+    (display "3. WRONG\n"))
+
+
+; 4
+;(define b (read-line (current-input-port) 'any))
+(define (sum-to-n n)
+  (if (> n 0)
+      (+ n (sum-to-n (- n 1)))
+      0)
+  ;(display  n)
+  ;(printf (~a n))
+  )
+
+(display (sum-to-n 100))
+
+
+; 5
+(define (sum-to-n-multiples n) (if (> n 0)
+                                   (if (or
+                                        (= (remainder n 3) 0)
+                                        (= (remainder n 5) 0))
+                                       (+ n (sum-to-n-multiples (- n 1)))
+                                       (sum-to-n-multiples (- n 1)))
+                                   0))
+
+
+
+; 6
+(define (product-to-n n) (if (> n 0)
+                          (* n (sum-to-n (- n 1)))
+                          0))
+
+(define (sum-or-product-to-n n f) (if (= f 1)
+                                      (sum-to-n n)
+                                      (if (= f 2)
+                                          (product-to-n n)
+                                          0)))
+
+
+
+
+(let loop ((i 0))
+  (when (< i 10)
+    (printf "i=~a\n" (/ i 3))
+    (loop (add1 i))))
+
+
+(let testing ((i 0))
+  (when (< i 10)
+    (printf "da")
+    (testing (add1 i))))
+
+
+
+
+(let help-me ((i 0))
+  (when (< i 20)
+    (display "Hello There\n")
+    (help-me (add1 i))))
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+#lang racket
+
+
+(define (rek i)
+  (cond
+    [(>= i 10) #f]
+    [else (display i) (rek (add1 i))]))
+
+(define (sum-to-n n)
+  (if (> n 0)
+      (+ n (sum-to-n (- n 1)))
+      0))
+
+(define (sum-to-x x)
+  (cond
+    [(> x 0) (printf "~a, " x) (+ x (sum-to-x (- x 1)))]
+    [else 0]))
+
+
+(define (list-and-output x)
+  (cond
+    [(< x 10) (printf "~a " x)  (list-and-output (+ x 1))]
+    [else 10]))
+
+(define (multiply-and-output x)
+  (cond
+    [(< x 10) (printf "~a " x)  (multiply-and-output (+ x 1))]
+    [else 10]))

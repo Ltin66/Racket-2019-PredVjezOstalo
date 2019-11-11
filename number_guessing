@@ -1,0 +1,27 @@
+#lang racket
+
+
+(define b 0)
+
+;(set b (read-line (current-input-port) 'any))
+
+(define (guess-num try cntr target)
+  (cond
+    [(<= cntr 0) #f]
+    [(= try target) #t]
+    [(> try target) (printf "> \n")
+                    (set! try (string->number (read-line (current-input-port) 'any)))
+                    (guess-num try (sub1 cntr) target)]
+    [(< try target) (printf "< \n")
+                    (set! try (string->number (read-line (current-input-port) 'any)))
+                    (guess-num try (sub1 cntr) target)]
+    ))
+
+
+(define (guessing-game (t 0))
+  (set! t (string->number (read-line (current-input-port) 'any)))
+  (guess-num t 4 (random 10)))
+    
+    
+
+
