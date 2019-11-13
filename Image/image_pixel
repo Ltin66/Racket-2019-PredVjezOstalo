@@ -1,0 +1,12 @@
+#lang racket
+(require 2htdp/image)
+
+;(color-red (color 1 2 3 4))
+
+
+(define img (circle 1 'solid "blue"))
+(image->color-list img)
+img
+
+
+

@@ -70,6 +70,55 @@
 ; > (compose 2 3)
 
 
+;lambda calculus ex
+
+(define (zero f x) x)
+
+(define (succesor n) (lambda (f x) (f (n f x))))
+
+(define (inc x) (+ x 1))
+
+(define (lambdanum->number lambdanum) (lambdanum inc 0))
+
+(lambdanum->number zero)
+
+(lambdanum->number (succesor zero))
+
+(lambdanum->number (succesor (succesor zero)))
+
+; zero := (λ (f x) x)
+; number  means applying a function f n-times
+; one :
+
+(define one (succesor zero))
+
+(define two (succesor one))
+
+(define three (succesor two))
+
+; addition, multiplication, ..
+
+
+(define (lambda-add n m) (lambda (f x) (n f (m f x))))
+
+(lambdanum->number (lambda-add one two)) ; 1 + 2 = 3
+
+(define (lambda-mul n m) (lambda ( f x) (n (lambda (y) (m f y)) x))) 
+
+(lambdanum->number (lambda-mul one two))
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

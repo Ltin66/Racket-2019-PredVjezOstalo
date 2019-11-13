@@ -1,0 +1,23 @@
+#lang racket
+
+; iteracija kroz listu sa first rest
+;(lister (lambda (x) (display x)) (list 1 2 3 4))
+(define (lister f ls)
+  (define (list-iter tmp_ls)
+    (cond [(= (length tmp_ls) 1) (f (first tmp_ls))]
+          [else
+           (f (first tmp_ls))
+           (list-iter (rest tmp_ls))]))
+  (list-iter ls))
+
+
+
+(define a (list (list 1 2 3 4) 2 3 4 5))
+a
+(first a)
+(rest a)
+
+(empty? '(1 2 3))
+
+
+(length '(1 2 3))

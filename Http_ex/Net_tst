@@ -1,0 +1,19 @@
+#lang racket
+;(require net/http-client)
+(require 2htdp/image)
+
+;(define conn-img (http-conn-open c
+; #:"192.168.1.7" #f 80 #f))
+;(define (x a b c) a)
+;(define c (http-conn))
+;(http-conn-open! c "192.168.1.7" #:port 80)
+
+;(http-conn-close! c)
+
+
+
+(define img (bitmap/url "http://192.168.1.7/capture"))
+
+
+
+
