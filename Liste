@@ -1,8 +1,16 @@
 #lang racket
+(require 2htdp/image)
+
+
+(define img_tst (list
+ (color 0 0 255 197)
+ (color 0 0 255 195)
+ (color 0 0 255 195)
+ (color 0 0 255 194)))
 
 ; iteracija kroz listu sa first rest
 ;(lister (lambda (x) (display x)) (list 1 2 3 4))
-(define (lister f ls)
+(define (lister f ls) ;dave
   (define (list-iter tmp_ls)
     (cond [(= (length tmp_ls) 1) (f (first tmp_ls))]
           [else
@@ -10,6 +18,18 @@
            (list-iter (rest tmp_ls))]))
   (list-iter ls))
 
+(define (red-component x)(display (color-red x)))
+
+(lister red-component img_tst)
+
+(display "\n")
+
+;apply ex
+(apply + (list 1 2 3 4 5 6 7 8 9)) ; 45
+
+(apply
+ (lambda (x y z) (+ x y z))
+ (list 1 2 3)) ; 6
 
 
 (define a (list (list 1 2 3 4) 2 3 4 5))
@@ -21,3 +41,43 @@ a
 
 
 (length '(1 2 3))
+
+(append (list 1 2 3) (list 4 5 6))
+
+; (define test (append (lister (lambda (x) x) (list 1 2 3 4 ))))
+
+(define test (list))
+
+;(append test 
+
+;(map (lambda (x) (red-ify x 100)) img_tst)
+
+(define (square x) (expt x 2))
+
+(define (squarer xs)
+  (if (empty? xs)
+      empty
+      (cons (square (first xs)) (squarer (rest xs)))))
+
+;color helper func
+;(define (color-component-green x) (color-green x))
+
+
+
+;Changes color of color struct
+;x struct
+;f change function
+;c color - red blue green alpha
+
+(define (color-change x f c)
+  (cond [(eq? c "red")
+         (color
+          (f (color-red x))
+          (color-green x)
+          (color-blue x)
+          (color-alpha x))]))
+
+
+(define tstc (color 1 2 3 4))
+
+(color-change tstc (lambda(x) (+ 10 x)) "red")
