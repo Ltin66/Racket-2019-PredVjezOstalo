@@ -1,0 +1,150 @@
+#lang sicp
+
+
+;;if list is empty return default
+;;else return function( first recurse(rest))
+;;
+;;map, reduce, any, all, filter
+
+
+;P1 write function chek range that inputs list and outs true
+;if all items in list are in range 0-255
+;for empty output true
+
+(define (check-range lst)
+  (define (in-range? value)
+    (and (<= 5 value)
+         (>= 95 value)))
+  (if (null? lst)
+      #t
+      (and (in-range? (car lst))
+           (check-range (cdr lst)))))
+
+;Problem 1' generilize the func so that it outputs a  list and a pair
+; in pair lower and upper bound
+
+
+
+
+(define (check-range-2 lst bounds)
+  (define (in-range? value)
+    (and (<= (car bounds) value)
+         (>= (cdr bounds) value)))
+  (if (null? lst)
+      #t
+      (and (in-range? (car lst))
+           (check-range-2 (cdr lst) bounds))))
+
+(check-range-2 (list 2 3 4) (cons 0 6))
+(check-range-2 (list 2 3 4) (cons 0 5))
+
+;Problem 2
+;function takes list and price and outputs all elements that are at most price
+
+;(map (lambda (x) (+ x 1)) (list 1 2 3) )
+
+
+(define (price-bound lst price)
+  (define (in-range? value)
+      (if (>= value price) value #f))
+  (let ((rez ((price-bound (cdr lst) price))))    
+    (cond ((null? lst)    rez)
+          (else (append rez (in-range? (car lst)) )))))
+
+(define (price-bound-2 lst price)
+  (define (in-range value)
+    (if (>= value price) value (list)))
+  (map in-range lst))
+
+
+
+;;
+
+
+(define (map lst fn)
+  (if (null? lst)
+      '()
+      (cons (fn (car lst)) (map (cdr lst) fn))))
+
+
+(define (reduce lst operation default)
+  (if (null? lst)
+      default
+      (operation (car lst) (reduce (cdr lst) operation default))))
+
+(define (and-f x y)
+  (and x y))
+
+(define (all lst predicate)
+  (reduce (map lst predicate) and-f #t))
+
+
+(define (filter lst predicate) ;; kao P2 samo gener
+  (if (null? lst)
+      '()
+      (let ((rest (filter (cdr lst) predicate)))
+      (if (predicate (car lst))
+          (cons (car lst) rest)
+          rest))))
+          
+
+
+(define (check-range-3 lst)
+  (define (in-range? value)
+    (and (<= 5 value)
+         (>= 1 value)))
+  (all lst in-range?))
+
+
+;P3
+; none :-> not
+; not-all :-> nand
+; a) write *any* operator
+; b) write *max* function (default 0)
+; c) write *min* function (default 0)
+
+(define (or-f x y)
+  (or x y))
+
+(define (any lst predicate)
+  (reduce (map lst predicate) or-f #f))
+
+
+(define (none lst predicate?)
+  (not (any lst predicate?)))
+
+;(define (none lst predicate?)
+ ; (not (any lst predicate?)))
+
+
+
+(define (max lst)
+  (define (larger value value2)
+    (if (> value value2) value value2))
+  (reduce lst larger (car lst))) 
+
+(define (min lst)
+  (define (smaller value value2)
+    (if (< value value2) value value2))
+  (reduce lst smaller (car lst))) 
+
+
+
+;P4 takes list of digits, converts to a decimal number in reverse order
+; (convert (1 2 3 4) -> 4321
+
+(define (convert-ts lst)
+  (if (null? lst)
+      0
+      (+ (* (car lst) 10) (convert (cdr lst)))))
+  
+(define (convert lst)
+  (define (instance-conversion x y)
+    (+ x (* 10 y)))
+  (reduce lst instance-conversion 0)) ; jer reduce uspoređuje od zadnjeg na pocetak (po 2) 
+
+
+
+       
+
+

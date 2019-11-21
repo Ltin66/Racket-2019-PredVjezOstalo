@@ -1,0 +1,35 @@
+#lang sicp
+
+
+;str 123
+
+(define (cons a b)
+  (lambda (x) (cond ((= x 0) a)
+                   ((= x 1) b)
+                   (else (display "errrr")))))
+
+(define (car p) (p 0))
+(define (cdr p) (p 1))
+
+(define pr (cons 'a 'b))
+(car pr)
+(cdr pr)
+pr
+
+
+; str. 125
+
+
+(define (check-range-2 lst bounds)
+  (define (in-range? value)
+    (and (<= (cdr bounds) value)
+         (>= (car bounds) value)))
+  (if (null? lst)
+      #t
+      (and (in-range? (car lst))
+           (check-range-2 (cdr lst)))))
+
+(check-range-2 (list 2 3 4) (cons 0 6))
+(check-range-2 (list 2 3 4) (cons 0 5))
+
+

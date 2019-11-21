@@ -1,0 +1,105 @@
+#lang sicp
+
+; Person :
+;  name
+;  birth year
+;  eye-color
+;  father
+;  mother
+
+
+;make-person , is-pearson? , father-of , mother-of , count-ancestors
+
+(define (make-person name birth-year eye-color father mother)
+  (list 'pearson name birth-year eye-color father mother))
+
+(define (is-person? p)
+  (or (eq? p 'unknown)
+      (eq? (car p) 'person)))
+
+
+(define fam-tree 
+(make-person "Test1" 1 "brown" 'unknown
+(make-person "Test2" 2 "brown" (make-person "Test3" 3 "brown" 'unknown 'unknown) 'unknown)))
+
+
+(define (mother-of d)
+  (if (eq? d 'unknown)
+      'unknown
+      (caddr (cddr d))))
+
+
+(define (father-of d)
+  (if (eq? d 'unknown)
+      'unknown
+      (caddr (cdddr d))))
+
+
+
+(define (count-known-people P)
+  (if (eq? P 'unknown)
+      0
+      (+ 1
+         (count-known-people (mother-of P))
+         (count-known-people (mother-of P)))))
+
+
+;P n
+;funtion avg family age, calculates the avg age of peple in a list (family tree)
+; helper function (pearsons-age P year) that returs the age of people in that year
+
+(define (person-birth-year d)
+    (if (eq? d 'unknown)
+      'unknown
+      (caddr d)))
+
+(define (persons-age P year)
+  (- year (person-birth-year P)))
+
+
+(define (average-age P year)
+  (define (sum-of-ages P)
+      (if (eq? P 'unknown)
+      0
+      (+ (persons-age P year)
+         (sum-of-ages (mother-of P))
+         (sum-of-ages (mother-of P)))))
+  (/ (sum-of-ages P) (count-known-people P)))
+
+(define (iter-count-known-people P)
+  (length (iter-family-tree P)))
+
+(define (iter-family-tree P)
+  (if (eq? P 'unknown)
+      '()
+      (append (list P)
+              (iter-family-tree (mother-of P))
+              (iter-family-tree (father-of P)))))
+
+
+
+(define (map lst fn)
+  (if (null? lst)
+      '()
+      (cons (fn (car lst)) (map (cdr lst) fn))))
+
+
+(define (reduce lst operation default)
+  (if (null? lst)
+      default
+      (operation (car lst) (reduce (cdr lst) operation default))))
+
+
+(define (sum lst)
+  (reduce lst + 0))
+
+
+
+;TODO flat map
+
+
+
+
+
+
+

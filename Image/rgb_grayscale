@@ -1,0 +1,15 @@
+#lang racket
+(require 2htdp/image)
+
+;x - color struct
+;mode - rgb->grayscale mode :
+; red, green, blue, alpha
+; 
+
+(define (color-to-grayscale x mode)
+  (cond [(eq? mode "red") (color (color-red x) (color-red x) (color-red x))]
+        
+(define
+
+(define (grayscale-mode x)
+  (cond [(eq? x "red") 
