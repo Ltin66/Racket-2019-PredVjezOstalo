@@ -1,0 +1,93 @@
+#lang sicp
+
+
+;Problem 1 , define function remove elem from list
+;removes the first (its a set) value in list
+;set is represented as a list
+
+
+
+(define (remove-first element-to-remove set)
+  (cond
+    ([null? set] '())
+    ([eqv? (car set) element-to-remove] (cdr set))
+    (else (cons (car set)
+          (remove-first element-to-remove (cdr set))))))
+
+
+(define (remove-all element-to-remove set)
+  (cond
+    ([null? set] '())
+    ([eqv? (car set) element-to-remove]
+     (remove-all element-to-remove (cdr set)))
+    (else (cons (car set)
+          (remove-all element-to-remove (cdr set))))))
+
+;list is an empty list or a pair of elem where the last one is an empty list
+;(define(accumulateopinitialsequence)(if(null?sequence)initial(op(carsequence)(accumulateopinitial(cdrsequence)))))
+
+
+(define (remove elem set)
+  (define (elem? x)
+    (not (eqv? x elem )))
+  (filter elem? set))
+
+
+;vraca lst sa elem za koje je predicate? #t
+(define (filter predicate? lst)
+  (if (null? lst)
+      '()
+      (if (predicate? (car lst))
+          (cons (car lst)
+                (filter predicate? (cdr lst)))
+          (filter predicate? (cdr lst)))))
+
+
+(define (accumulate method default lst)
+  (if(null? lst)
+     default
+     (method (car lst)
+             (accumulate method default (cdr lst)))))
+
+;raspakira listu za jednu razinu
+(define (flatmap method lst)
+  (accumulate append '() (map method lst)))
+
+(accumulate (lambda (x y) (cons x y)) '() '(a b c))
+
+
+
+;(flatmap (lambda (x y) (cons (+ x 2) y)) '(1 2 3 4 5))
+
+(flatmap (lambda (x) '()) '(1 2 3 4))
+
+(filter (lambda (x) (> x 4)) '(1 2 3 4 5 6))
+
+
+;str 168
+
+;Create a procedure that takes  a set and gives all premutations of that set
+;
+
+(define (permutations s)
+  (display "Called permutations with : ")
+  (display s)
+  (newline)
+  (define (add-x-to-subpermutations x)
+    (let ((subpermutations (permutations (remove x s))))
+    (display "-->")
+    (display x)
+    (newline)
+    (display subpermutations)
+    (newline)
+    (map (lambda (p) (cons x p)) subpermutations)))
+  (if (null? s)
+      (begin (display "Empty list move along") (newline)
+      (list '()))
+      (flatmap add-x-to-subpermutations s)))
+
+(permutations '(1 2 3))
+
+
+
+

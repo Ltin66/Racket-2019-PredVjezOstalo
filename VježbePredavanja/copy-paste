@@ -1,0 +1,32 @@
+#lang racket
+
+;vrlo moderan nacin pisanja koda
+(define (filter predicate? lst)
+  (define (possibly-element x)
+    (if (predicate? x)
+        (lsit x)
+        '()))
+  (flatmap possibly-element lst))
+
+
+(define(flatmap proc seq)
+  (accumulate append nil (map proc seq)))
+
+
+(define (permutations s)
+  (if(null? s); empty set?
+     (list null) ; sequence containing empty set
+     (flatmap(lambda(x)
+               (map ( lambda (p) (cons x p))
+                    (permutations (remove x s))))
+             s)))
+
+
+
+(define (permutations s)
+  (define (add-x-to-subpermutations x)   
+    (map (lambda (p) (cons x p)) (permutations (remove x s))))
+  (if (null? s)
+      (list '())
+      (flatmap add-x-to-subpermutations s)))
+

@@ -1,0 +1,32 @@
+#lang racket
+
+;(eval (call-with-input-string "(+ 1 2)" read))
+
+
+(define D2Ar  '(
+                '(+ 2 3 4)
+                '(- 6 7 8)
+                '(- 10 11 12)
+                ))
+
+;
+
+(define ns (make-base-namespace))
+
+
+(eval '(cons 1 2) ns) 
+
+(eval (first D2Ar) ns)
+
+(eval (eval (first D2Ar) ns) ns) ; wrkz
+
+
+
+
+
+
+
+
+
+
+

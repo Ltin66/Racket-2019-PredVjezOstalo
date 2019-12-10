@@ -1,0 +1,9 @@
+#lang racket
+
+
+(define (filter predicate? lst)
+  (define (possibly-element x)
+    (if (predicate? x)
+        (lsit x)
+        '()))
+  (flatmap possibly-element lst))
