@@ -45,8 +45,15 @@
         (else (foo-iter-iter x1 x2 x3 x4 (- n 1))))))
   (foo-iter-iter x0 x1 x2 x3 (- n 3)))
 
+
+
+
+
 ;Map-, filter-, length-, count-, reverse-, accumulate-, flatmap
-;member, find
+;member, find? (dali treba poz elem?)
+
+
+
 
 
 
@@ -108,10 +115,10 @@
   (accumulate (lambda (x y) (+ x y)) init lst))
 
   
-;Acc,Fold,Reduce,Compress
+;Accumulate,FoldR,Reduce,Compress,Inject
 (define (accumulate proc init lst)
   (cond
-    ([null? lst] 0)
+    ([null? lst] init)
     (else (proc (car lst) (accumulate proc init (cdr lst))))))
   
 (sum-list 0 '(1 2 3 4 5))
@@ -209,6 +216,67 @@
 
 
 
+;FLATTEN
+;
+
+(define (flatten lst)
+  (cond
+    ([null? lst] '())
+    ([pair? (car lst)]
+     (append (flatten (car lst))
+             (flatten (cdr lst))))
+    (else (cons (car lst) (flatten (cdr lst))))))
+
+(flatten '(9 (1 3 5) 3 (2 (1 2 3 4))))
 
 
 
+;FLATMAP
+
+(define (flatmap proc seq) 
+  (accumulate append 0 (map proc seq)))
+
+
+(map add1 '(1 2 3 4 5 6 7 8 9) )
+
+
+(accumulate (lambda (x y) (cons (cons x y) y)) '() '(1 2 3 4 5))
+
+(define (lesser x y)  (if(< x y) x y))
+
+(define (min lst) (accumulate lesser
+                              (if(null? lst) '() (car lst)) lst))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
