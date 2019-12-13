@@ -199,6 +199,8 @@
 
 ; 6. ZADATAK , pitat kako znat koji adresirat
 
+;(define 
+
 
 ; 7. ZADATAK
 
@@ -231,16 +233,16 @@
 
 
 
-;FLATMAP
+;FLATMAP, append-map
 
 (define (flatmap proc seq) 
-  (accumulate append 0 (map proc seq)))
+  (accumulate append nil (map proc seq)))
 
 
 (map add1 '(1 2 3 4 5 6 7 8 9) )
 
 
-(accumulate (lambda (x y) (cons (cons x y) y)) '() '(1 2 3 4 5))
+(accumulate append '() '(1 2 3 4 5))
 
 (define (lesser x y)  (if(< x y) x y))
 
@@ -254,11 +256,13 @@
 
 
 
+;Primjer:(group-by odd?  ’(1 2 3 4 5))→’((1 3 5) (2 4))
+;Napomena:Predikatodd?vraća vrijednost#tza neparan broj i #f za paran broj
+  
+;(accumulate
 
-
-
-
-
+;Cartesian product
+(flatmap (lambda (x) (map (lambda (y) (list y x)) '(1 2 3))) '(a b c))
 
 
 
