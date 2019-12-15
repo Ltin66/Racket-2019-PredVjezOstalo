@@ -1,16 +1,15 @@
-#lang br/quicklang
+#lang racket
+;#lang br/quicklang
 
 (define (read-syntax path port)
-  (define (form-syntax-from-port portA syn-lst syn-tmp)
-    (let (()
+  (define be-syn '(module lucy br))
+  (define src-lines (port->lines port))
+  (define (eval cntr lst)
     (cond
-      ([char-whitespace? (peek-char port)] (
-       (port-commit-peeked
-    (let ((comm (append (list 
-
-
-
-
+      ([eq? cntr 10] lst)
+      (else (eval (+ 1 cntr) (append lst '((display 'tin)) '((display "\n")))))))
+  (datum->syntax #f (eval -20 be-syn)))
+     
 
 
 
@@ -26,9 +25,4 @@
 ;the br language, that eval­u­ates the expres­sion 42.”
 
 (provide read-syntax)
-
-; '(module lucy br 42)
-; same as :
-;  (quote (module lucy br 42))
-
-
+ 
