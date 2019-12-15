@@ -1,13 +1,24 @@
 #lang br/quicklang
 
- 
+(define (read-syntax path port)
+  (define (eval portA dat_um)
+    (cond
+      ([char-whitespace? (peek-char port)]
+       (port-commit-peeked
+    (let ((comm (append (list 
 
-(define (read-syntax path port) 
-  (define src-lines (port->lines port))
+
+
+
+
+
+
+  
+ ; (define src-lines (port->lines port))
   ;read everything from port
   ;src-lines contains the port content (file content)
-  (datum->syntax #f '(module lucy br
-                       (display src-lines))))
+  ;(datum->syntax #f '(module lucy br
+   ;                    42)))
 
 ;(module lucy br 42)
 ;Means “a module named lucy, using the expander from

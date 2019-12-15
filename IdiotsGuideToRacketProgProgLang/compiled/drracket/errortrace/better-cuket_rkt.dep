@@ -1,0 +1,1 @@
+("7.4" racket ("821b9bdf1ed191e9f61ef70a8dcbd54d77ed87c6" . "2bc28d5caf8a01d04f680a94b9b60f9a2132e8ed") #"/home/tin/Documents/funk_prog_ex/IdiotsGuideToRacketProgProgLang/defs.rkt" (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))
