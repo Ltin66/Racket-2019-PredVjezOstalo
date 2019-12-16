@@ -1,0 +1,115 @@
+#lang sicp
+; map , filter, length
+; reverse, count predicate?
+; accumulate, member, unique
+; flatten, flatmap, zip
+
+
+(define (map proc lst)
+  (cond
+    ([null? lst] '())
+    (else (append (list (proc (car lst))) (map proc (cdr lst))))))
+
+
+(define (filter pred? lst)
+  (cond
+    ([null? lst] '())
+    ([pred? (car lst)] (append (list (car lst)) (filter pred? (cdr lst))))
+    (else (filter pred? (cdr lst)))))
+
+(define (length lst)
+  (cond
+    ([null? lst] 0)
+    (else (+ 1 (length (cdr lst))))))
+
+
+(define (reverse lst)
+  (cond
+    ([null? lst] '())
+    (else (append (reverse (cdr lst)) (list (car lst))))))
+  
+
+(define (count-predicate pred? lst)
+  (cond
+    ([null? lst] 0)
+    ([pred? (car lst)] (+ 1 (count-predicate pred? (cdr lst))))
+    (else (count-predicate pred? (cdr lst)))))
+
+(define (count-predicateV2 pred? lst)
+  (length (filter pred? lst)))
+
+
+(define (accumulate proc init lst)
+  (define (accumulate-rek proc lst)
+    (cond
+      ([null? lst] init)
+      (else (proc (car lst) (accumulate-rek proc (cdr lst))))))
+  (proc (car lst) (accumulate-rek proc (cdr lst))))
+      
+
+(define (member elem lst)
+  (cond
+    ([null? lst] #f)
+    ([eq? elem (car lst)] #t)
+    (else (member elem (cdr lst)))))
+
+(define (unique lst)
+  (cond
+    ([null? lst] #t)
+    ([member (car lst) (cdr lst)] #f)
+    (else (unique lst))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

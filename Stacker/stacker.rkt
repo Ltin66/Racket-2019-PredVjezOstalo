@@ -7,7 +7,7 @@
   ;read everything from port
   ;src-lines contains the port content (file content)
   (datum->syntax #f '(module lucy br
-                       (display src-lines))))
+                       42)))
 
 ;(module lucy br 42)
 ;Means “a module named lucy, using the expander from
