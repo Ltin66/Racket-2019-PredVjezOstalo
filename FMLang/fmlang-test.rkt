@@ -1,5 +1,7 @@
 #lang reader "fmlangV2.rkt"
 
-toinbdykb
-higizu
-tz
+toinž bdykb
+higžizu
+tzž
+ććććčččććšđšđ
+kkkčćčććčćč

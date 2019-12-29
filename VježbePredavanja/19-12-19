@@ -1,0 +1,62 @@
+#lang sicp
+
+
+; str 303 i prije 
+
+(define (make-accumulator init)
+  (define (add x)
+    (set! init (+ x init))
+    init)
+  add)
+
+
+;> (define ds (make-accumulator 100))
+;> (ds 200)
+;300
+;> (ds 200)
+;500
+;>
+
+
+
+(define (make-monitored f)
+  (define count 0)
+  (define (dispatch messg)
+    (cond
+      ([eq? messg 'total] count)
+      ([eq? messg 'rst] (set! count 0))
+      (else (set! count (+ count 1)) (f messg))))
+  dispatch)
+
+;> (define s (make monitored sqrt))
+;> (define s (make-monitored sqrt))
+;> (s 100)
+;10
+;> (s 64)
+;8
+;> (s 64)
+;8
+;> (s 'total)
+;3
+;> 
+
+
+(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

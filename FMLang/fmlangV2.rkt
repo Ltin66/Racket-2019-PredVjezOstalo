@@ -2,13 +2,14 @@
 ;#lang br/quicklang
 
 (define (read-syntax path port)
-  (define be-syn '(module lucy br))
+  (define be-syn '())
   (define src-lines (port->lines port))
-  (define (eval cntr lst)
+  (define (eval-a cntr lst)
     (cond
-      ([eq? cntr 10] lst)
-      (else (eval (+ 1 cntr) (append lst '((display 'tin)) '((display "\n")))))))
-  (datum->syntax #f (eval -20 be-syn)))
+      ([eq? cntr 10] (list lst))
+      (else (eval-a (+ 1 cntr) (append lst '((display 'test)) '((display "\n")))))))
+  (define x 2323)
+  (datum->syntax #f (append '(module lucy br) (eval-a -20 be-syn))))
      
 
 

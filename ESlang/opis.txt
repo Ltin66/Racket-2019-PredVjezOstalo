@@ -23,9 +23,7 @@ Variables (circular list, svake page ima svoju? a front i back se kopiraju?)
 
 	SWAP		SWP
 
-Loops ???
-
-	WHILE		
+	
 
 CONTROL
 (ili start scopa ili jedna naredba)

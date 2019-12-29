@@ -1,0 +1,15 @@
+#lang sicp
+
+
+
+
+(define (make-accumulator init)
+  (define (add x)
+    (set! init x))
+  add)
+
+
+
+
+
+

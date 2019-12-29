@@ -80,10 +80,16 @@
 (flatmap  (lambda (x) (map (lambda (y) (list y x)) '(1 2 3)))
           '(4 5 6))
 
+(define (cartesian-product lst1 lst2)
+  (flatmap  (lambda (x) (map (lambda (y) (list y x)) lst1))
+          lst2))
+  
+(define (double-num-list n)
+  (list n n))
 
+;(define (
 
-
-
+(flatmap double-num-list '(1 2 3 4))
 
 
 

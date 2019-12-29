@@ -1,0 +1,36 @@
+#lang racket
+
+
+
+(define comm-lst
+  '(
+    ( (display 'test) (display "\n") (display 'test) (2) )
+    ( (display 567) (1) )
+    ))
+
+(define prog-mem-lst '(-1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1)) 
+
+(define prog-mem-head 0)
+(define prog-mem-tail 11)
+
+
+
+(define (dyn-eval lst)
+  (define ns-es (make-base-namespace))
+  (define (dyn-eval-iter x y comms)
+    (cond
+      ([eq? 1 (car (list-ref (list-ref comm-lst y) x))]
+       (display 'ok))
+      ([eq? 2 (car (list-ref (list-ref comm-lst y) x))]
+       (dyn-eval-iter 0 (+ 1 y) comms))
+      (else
+       (eval (list-ref (list-ref comm-lst y) x) ns-es)
+       (dyn-eval-iter (+ 1 x) y comms))))
+  (dyn-eval-iter 0 0 lst))
+
+
+
+
+
+
+
