@@ -9,7 +9,7 @@
       ([eq? cntr 10] (list lst))
       (else (eval-a (+ 1 cntr) (append lst '((display 'test)) '((display "\n")))))))
   (define x 2323)
-  (datum->syntax #f (append '(module lucy br) (eval-a -20 be-syn))))
+  (datum->syntax #f (append '(module lucy racket) (eval-a -10 be-syn))))
      
 
 

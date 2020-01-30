@@ -11,10 +11,10 @@
 (define comm-lst-ddd-test
   '(   ;glavno polje
     (  ;z0
-     ((IIA) (OIA) (RDW))        ;y0
+     ((IIA) (OIA) (RDW) (STP))        ;y0
      ((NOP) (PUP) (RLF) (STP))) ;y1
     (  ;z1
-     ((NOP) (NOP) (STP))        ;y0
+     ((NOP) (NOP) (NOP) (STP))        ;y0
      ((NOP) (RRT) (OIA) (STP))) ;y1
     )) ;x0   ;x1   ;x2   ;x3
      

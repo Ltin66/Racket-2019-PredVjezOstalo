@@ -1,6 +1,7 @@
 #lang br/quicklang
 
 (define (read-syntax path port)
+  (define (get-char-from-port) (read-char port))
   (define (form-syntax-from-port portA syn-lst syn-tmp)
     (let (()
     (cond

@@ -1,0 +1,100 @@
+#lang sicp
+
+(define (stream-cons a b) (cons a (delay b)))
+
+(define (stream-cdr s) (force (cdr s)))
+(define (stream-car s) (force (car s)))
+
+
+
+(define (fibgen a b) (cons-stream a (fibgen b (+ a b))))
+
+(define fibs (fibgen 0 10))
+
+
+(define (map-stream proc str)
+  (cond
+    ((stream-null? (stream-cdr str)) (proc (stream-car str)))
+    (else (proc (stream-car str)) (map-stream proc (stream-cdr str)))))
+
+
+(map-stream (lambda (x) (display x))
+              fibs)
+
+
+
+
+
+(define input-prompt ">>> M-Eval input :")
+(define output-prompt ">>> M-Eval value :")
+
+
+(define (drive-loop)
+  (prompt-for-input input-prompt)
+  (let ((input (read))
+        (let ((output (eval input the-global-environment)))
+          (announce-output output-prompt)))
+    (drive-loop)))
+          
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

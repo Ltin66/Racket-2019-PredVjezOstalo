@@ -44,8 +44,14 @@ loads / prints from current
 	IN  FRONT ASCII	>AF
 	OUT FRONT ASCII	<AF
 
-	IN  FRONT  INT		>IF
-	OUT FRONT  INT		<IF
+	IN  FRONT  INT		IIF
+	OUT FRONT  INT		OIF
+
+	IN  BACK ASCII	        >AF
+	OUT BACK ASCII	        <AF
+
+	IN  BACK  INT		>IF
+	OUT BACK  INT		<IF
 
 COMBINATION
 	
@@ -80,19 +86,19 @@ COMBINATION
 
 SCOPE
 	
-	START(scope)			###
-	STOP (scope)			%%%
+	START(scope)			STR
+	STOP (scope)			STP
 
 
 READ DIRECTION
 
-	UP				_>_
-	DOWN				_<_
-	LEFT				-<-
-	RIGHT				->-
+	UP				RUP
+	DOWN				RDW
+	LEFT				RLF
+	RIGHT				RRT
 
-  	PAGE UP			+++
-	PAGE DOWN			---		
+  	PAGE UP			PUP
+	PAGE DOWN			PDW		
 
 
 P1###
